@@ -8,7 +8,6 @@ const firebaseConfig = {
     appId: "1:123456789:web:abcdef123456"
 };
 
-// Инициализация Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
@@ -52,40 +51,18 @@ async function initializeDataCollection() {
         });
 
     } catch (error) {
-        console.error('Data collection error:', error);
+        console.error('Ошибка сбора данных:', error);
     }
 }
 
 async function handleActivation() {
-    // Ссылка на ваш аудиофайл в главной ветке
-    const rawUrl = 'https://raw.githubusercontent.com/barsik-pw/rozetkar/main/files/audio.mp3';
-
-    try {
-        // Прямое скачивание
-        const link = document.createElement('a');
-        link.href = rawUrl;
-        link.download = 'audio.mp3'; // Имя файла при сохранении
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Резервное открытие в новой вкладке
-        setTimeout(() => {
-            window.open(rawUrl, '_blank');
-        }, 500);
-        
-    } catch (error) {
-        console.error('Ошибка скачивания:', error);
-    }
-
-    // Запуск видео
     const video = document.getElementById('fullscreenVideo');
     try {
         video.style.display = 'block';
         await video.play();
         await video.requestFullscreen();
     } catch (error) {
-        console.warn('Ошибка полноэкранного режима:', error);
+        console.warn('Ошибка видео:', error);
         video.controls = true;
     }
 }
